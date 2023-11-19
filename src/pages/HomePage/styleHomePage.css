@@ -1,0 +1,125 @@
+.homePage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.homePage_about{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding:3rem;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 25px 25px 0px 0px;
+    border-bottom: 2px solid #006AF5;
+    background: #83D9FF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    
+}
+.about_contenido{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    width: 80%;
+}
+.about_contenido h1{
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #006AF5;
+}
+.about_contenido p{
+    font-size: 1.2rem;
+    width: 80%;
+    color: #0E2D5D;
+}
+.about_btns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+}
+.about_btns_btn-public{
+    border-radius: 15px;
+    border: 1px solid #1EA1FF;
+    background: rgba(217, 217, 217, 0.00);
+    color: #1EA1FF;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.about_btns_btn-recibe{
+    width: 190px;
+    border-radius: 15px;
+    border: 1px solid #1EA1FF;
+    background: #1EA1FF;
+    color: #fff;
+}
+.about_estadisticas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #B5E7FF;
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+}
+.estadisticas_list{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    gap: 2rem;
+}
+.estadisticas_list_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .2rem;
+}
+.estadisticas_list_container h3{
+    font-size: 2rem;
+    color: #006AF5;
+}
+.partners{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    border-radius: 15px;
+    background: #83D9FF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+.partners_list{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    list-style: none;
+}
+.img-adidas{
+    width: 200px;
+    height: 80px;
+}
+.img-coca{
+    width: 247px;
+    height: 80px;
+}
+.img-nike{
+    width: 140px;
+    height: 80px;
+}
+.img-gatorade{
+    width: 140px;
+    height: 80px;
+}
