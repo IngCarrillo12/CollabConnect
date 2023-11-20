@@ -4,6 +4,7 @@ import '../Register/Register.css'
 import { login, loginWithGoogle } from '../../resources/Auth'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../../redux/userSlice'
+import Swal from 'sweetalert2'
 export const Login = () => {
   const [user, setUser] = useState({email:"", password:""})
   const navigate = useNavigate()
@@ -17,14 +18,33 @@ export const Login = () => {
   }
   const handleGoogleLogin = async()=>{
       await loginWithGoogle()
+      Swal.fire({
+        title: "success",
+        text: "Logeado Correctamente",
+        icon: "success"
+      });
       navigate("/")
     
   }
   const handleSubmit = async(e)=>{
     e.preventDefault()
     const userLogin = await login(user.email, user.password)
-    dispatch(addUser(userLogin))
-    if(userLogin)navigate("/")   
+    if(userLogin){
+      dispatch(addUser(userLogin))
+      Swal.fire({
+        title: "success",
+        text: "Logeado Correctamente",
+        icon: "success"
+      });
+      if(userLogin.description && userLogin.instagram){
+        navigate('/')
+      }else if(userLogin.marca){
+        navigate('/formulario/marca')
+      }else{
+        navigate('/formulario/influencer')
+      }
+      
+    } 
   }
   return (
     <div className='container center'>

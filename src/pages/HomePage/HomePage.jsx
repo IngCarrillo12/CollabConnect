@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 export const HomePage = () => {
   const user = useSelector(state=>state.user)
   useEffect(() => {
-    console.log(user)
   }, [user])
   
   return (

@@ -3,12 +3,15 @@ import './styleUserMenu.css'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../resources/Auth'
 import { resetUser } from '../../redux/userSlice'
+import { useNavigate } from 'react-router-dom'
 export const UserMenu = ({name, email, image, setOpenMenu}) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const logOut = ()=>{
       logout()
       dispatch(resetUser())
       setOpenMenu(false)
+      navigate('/')
   }
   return (
     <div className='userMenu'>

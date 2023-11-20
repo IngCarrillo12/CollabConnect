@@ -12,6 +12,9 @@ export const Header = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
     const [openMenu, setOpenMenu] = useState(false)
+    const handleCreateOfert = ()=>{
+        navigate('/creatingOfert')
+    }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if(currentUser)dispatch(addUser(currentUser));
@@ -46,7 +49,11 @@ export const Header = () => {
                     ):(
                         <div className='userAuth'>
                         <img width="50" onClick={()=>setOpenMenu(!openMenu)} height="50" src={user.photoURL} alt="user-male-circle"/>
-                       
+                       {
+                        user.marca&&(
+                           <button onClick={handleCreateOfert} className='btn'>Crear Oferta</button> 
+                        )
+                       }
                         {
                             openMenu&&(
                                 <UserMenu name={user.nombre} email={user.email} image={user.photoURL} setOpenMenu={setOpenMenu}/>

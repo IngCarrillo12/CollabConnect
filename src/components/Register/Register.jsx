@@ -4,13 +4,19 @@ import './Register.css'
 import { signUp } from '../../resources/Auth'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../../redux/userSlice'
+import Swal from "sweetalert2"
+
 export const Register = () => {
-  const [user, setUser] = useState({firstName:'', lastName: "", birthday:{day:'',month:'',year:''}, marca:false, email:"", password:"", photoURL:""})
+  const [user, setUser] = useState({firstName:'', lastName: "", birthday:{day:null,month:null,year:null}, marca:false, email:"", password:"", photoURL:""})
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const regexDia = /^(0[1-9]|[1-2][0-9]|3[0-1])$/;
+  const regexMes = /^(0[1-9]|1[0-2])$/;
+  const regexAno = /^(198\d|199\d|200[0-3])$/;
+  const regexNombre = /^[A-Za-z]+$/;
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
     if (type === 'checkbox') {
       // Manejar cambios en el checkbox
       setUser((prevUser) => ({
@@ -37,12 +43,40 @@ export const Register = () => {
 
   const handleSubmit = async(e)=>{
     e.preventDefault()
+    if(!regexDia.test(user.birthday.day)|| !regexMes.test(user.birthday.month) || !regexAno.test(user.birthday.year)){
+      Swal.fire({
+        title: "ERROR",
+        text: "Fecha de nacimiento invalida. Por favor Corregir",
+        icon: "error"
+      });
+      return;
+    }
+    if(!regexNombre.test(user.firstName) && !regexNombre.test(user.firstName)){
+      Swal.fire({
+        title: "ERROR",
+        text: "Nombre Invalido, Por favor Corregir",
+        icon: "error"
+      });
+      return;
+    }
     try {
       const response = await signUp(user)
       dispatch(addUser(response))
-      if(response)navigate("/") 
-    } catch (error) {
+      if(response){
+        Swal.fire({
+          title: "success",
+          text: "Registrado Correctamente",
+          icon: "success"
+        });
+        if(response.marca){
+          navigate("/formulario/marca") 
+        }else{
+          navigate("/formulario/influencer") 
+        }
+      }
       
+    } catch (error) {
+        throw error
     }
   }
   return (
@@ -61,19 +95,19 @@ export const Register = () => {
         <input onChange={handleChange} type="text" name='lastName' className="input input-name" placeholder="Dominguez" required/>
        </div>
         </div>
+        <div className='form_group'>
+        <label htmlFor="">Fecha de nacimiento:</label>
         <div className='from_group-birthday'>
           <div className='form_group'>
-            <label htmlFor="day">Dia</label>
-            <input onChange={handleChange} type="number" name='day' className='input input-birthday' placeholder='12' required />
+            <input onChange={handleChange} type="number" name='day' className='input input-birthday' placeholder='Dia' required />
           </div>
           <div className='form_group'>
-            <label htmlFor="month">Mes</label>
-            <input onChange={handleChange} type="number" name='month' className='input input-birthday' placeholder='7' required />
+            <input onChange={handleChange} type="number" name='month' className='input input-birthday' placeholder='Mes' required />
           </div>
           <div className='form_group'>
-            <label htmlFor="year">Anho</label>
-            <input onChange={handleChange} type="number" name='year' className='input input-birthday' placeholder='2001' required />
+            <input onChange={handleChange} type="number" name='year' className='input input-birthday' placeholder='Ano' required />
           </div>
+        </div>
         </div>
         <div className='form_group'>
         <label htmlFor="email">Email:</label>
