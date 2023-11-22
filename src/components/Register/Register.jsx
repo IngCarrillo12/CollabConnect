@@ -7,7 +7,7 @@ import { addUser } from '../../redux/userSlice'
 import Swal from "sweetalert2"
 
 export const Register = () => {
-  const [user, setUser] = useState({firstName:'', lastName: "", birthday:{day:null,month:null,year:null}, marca:false, email:"", password:"", photoURL:""})
+  const [user, setUser] = useState({firstName:'', lastName: "", birthday:{day:null,month:null,year:null}, marca:false, email:"", password:""})
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const regexDia = /^(0[1-9]|[1-2][0-9]|3[0-1])$/;
@@ -35,7 +35,6 @@ export const Register = () => {
       setUser((prevUser) => ({
         ...prevUser,
         [name]: value,
-        photoURL: 'https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos-810x540.jpg',
       }));
     }
 };
@@ -81,7 +80,7 @@ export const Register = () => {
   }
   return (
     <>
-   <div className='container center'>
+   <div className='container-auth-register center'>
     <div className="form-container">
       <p className="title">Sign Up</p>
       <form action="" onSubmit={handleSubmit} className='form'>

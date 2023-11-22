@@ -5,6 +5,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+    background-color: var(--color-blanco);
 }
 .homePage_about{
     display: flex;
@@ -16,10 +17,9 @@
     padding:3rem;
     width: 90%;
     max-width: 1200px;
+    background-color: var(--color-blanco);
     border-radius: 25px 25px 0px 0px;
-    border-bottom: 2px solid #006AF5;
-    background: #83D9FF;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 25px var(--color-letras);
     
 }
 .about_contenido{
@@ -34,12 +34,13 @@
 .about_contenido h1{
     font-size: 2rem;
     text-transform: uppercase;
-    color: #006AF5;
+    color: var(--color-letras);
+    text-shadow: 0px 0px 3px var(--color-letras);
 }
 .about_contenido p{
     font-size: 1.2rem;
     width: 80%;
-    color: #0E2D5D;
+    color: var(--color-letras);
 }
 .about_btns{
     display: flex;
@@ -49,25 +50,37 @@
 }
 .about_btns_btn-public{
     border-radius: 15px;
-    border: 1px solid #1EA1FF;
-    background: rgba(217, 217, 217, 0.00);
-    color: #1EA1FF;
+    border: 1px solid var(--color-verde);
+    background-color: transparent;
+    color: var(--color-verde);
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all ease-in-out .4s;
+}
+.about_btns_btn-public:hover{
+    background-color: var(--color-verde);
+    color: #fff;
+}
+.about_btns_btn-recibe{
+    width: 220px;
+    border-radius: 15px;
+    border: 1px solid var(--color-verde);
+    background: var(--color-verde);
+    color: #fff;
     font-size: 1rem;
     font-weight: 700;
 }
-.about_btns_btn-recibe{
-    width: 190px;
-    border-radius: 15px;
-    border: 1px solid #1EA1FF;
-    background: #1EA1FF;
-    color: #fff;
+.about_btns_btn-recibe:hover{
+    background-color: transparent;
+    color: var(--color-verde);
 }
 .about_estadisticas{
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 50%;
     gap: 1rem;
-    background-color: #B5E7FF;
+    background-color: var(--color-verde);
     border-radius: 15px;
     padding: 1rem 1.5rem;
 }
@@ -77,6 +90,7 @@
     align-items: center;
     list-style: none;
     gap: 2rem;
+    width: 100%;
 }
 .estadisticas_list_container{
     display: flex;
@@ -87,7 +101,11 @@
 }
 .estadisticas_list_container h3{
     font-size: 2rem;
-    color: #006AF5;
+    color: var(--color-letras);
+    text-shadow: 0px 0px 3px var(--color-letras);
+
+}.estadisticas_list_container span{
+    color: var(--color-letras);
 }
 .partners{
     display: flex;
@@ -96,8 +114,8 @@
     width: 100%;
     height: 100px;
     border-radius: 15px;
-    background: #83D9FF;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background: var(--color-blanco);
+    box-shadow: 0px 0px 25px var(--color-letras);
 
 }
 .partners_list{

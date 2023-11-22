@@ -47,17 +47,17 @@ export const Login = () => {
     } 
   }
   return (
-    <div className='container center'>
+    <div className='container-auth-login center'>
     <div className="form-container">
       <p className="title">Welcome back</p>
       <form action="" onSubmit={handleSubmit} className='form'>
         <div className='form_group'>
         <label htmlFor="email">Email:</label>
-        <input onChange={handleChange} type="email" name='email' className="input" placeholder="YourEmail@company.com"/>
+        <input onChange={handleChange} type="email" name='email' className="input" placeholder="YourEmail@company.com" required/>
         </div>
         <div className='form_group'>
         <label htmlFor="password">Password:</label>
-        <input onChange={handleChange} type="password" name='password' className="input" placeholder="*******"/>
+        <input onChange={handleChange} type="password" name='password' className="input" placeholder="*******" required/>
         </div>
         <button className="form-btn" type='submit'>Log in</button>
         </form>

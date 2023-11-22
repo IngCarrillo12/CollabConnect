@@ -3,10 +3,13 @@ import './styleUserMenu.css'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../resources/Auth'
 import { resetUser } from '../../redux/userSlice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+
 export const UserMenu = ({name, email, image, setOpenMenu}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const logOut = ()=>{
       logout()
       dispatch(resetUser())
@@ -20,7 +23,8 @@ export const UserMenu = ({name, email, image, setOpenMenu}) => {
          <h3 className='userMenu_name'> {name}</h3>
       </div>
         <h4 className='userMenu_email'><b>Email:</b><br/> {email}</h4>
-        <button className='btn btn-login' onClick={logOut}>Logout</button>
+        <Link className='userMenu_linkEditPerfil' to={'/editperfil'}>Editar Perfil</Link>
+        <button className='btn btn-logout' onClick={logOut}>Logout</button>
     </div>
   )
 }

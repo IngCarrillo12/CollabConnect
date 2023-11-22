@@ -1,0 +1,88 @@
+
+.container-oferta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: 2rem 0;
+    padding: 3rem 2rem;
+    border-radius: 25px;
+    border: 1px solid var(--color-verde);
+    width: 80%;
+    color: var(--color-letras);
+    background-color: var(--color-blanco);
+    box-shadow: 0px 0px 25px var(--color-verde);
+}
+.oferta_infoMarca{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+    gap: 1rem;
+   
+}
+.infoMarca_containerImg{
+    width: 80px;
+}
+.infoMarca_containerImg img{
+    width: 100%;
+    border-radius: 15px;
+}
+.infoMarca_red-fecha{
+    display: flex;
+    flex-direction: column;;
+}
+.infoMarca_red-fecha h3{
+    text-shadow: 0px 0px 3px var(--color-letras);
+}
+.oferta_infoOferta{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem;
+    width: 70%;
+}
+.oferta_infoOferta h1{
+    font-size: 3rem;
+    text-shadow: 0px 0px 3px var(--color-letras);
+}
+.oferta_infoOferta_pais-red{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+    width: 100%;
+}
+.oferta_infoOferta_pais-red span{
+    border-left: 2px solid var(--color-verde);
+    padding-left: .5rem;
+}
+.oferta_infoPostulados{
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+}
+.oferta_infoPostulados span{
+    color: var(--color-letras);
+    font-weight:500;
+}
+.btn-postularse{
+    width: 200px !important;
+    background-color: var(--color-verde);
+    border: 1px solid var(--color-verde);
+    color: var(--color-blanco);
+    transition: all ease-in-out .4s;
+}
+.btn-postularse:hover{
+    background-color: transparent;
+    color: var(--color-verde);
+}
+.oferta_description{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.oferta_description article{
+    padding: 1rem;
+}

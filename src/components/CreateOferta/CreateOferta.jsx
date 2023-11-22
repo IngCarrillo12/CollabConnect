@@ -1,14 +1,30 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { crearOferta } from '../../resources/OfertasColaboracion'
+import { addOferta } from '../../redux/ofertasSlice'
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { useQuill } from 'react-quilljs'
+import 'quill/dist/quill.snow.css'
+import toolbar from '../../toolbar'
+import './styleCreateOferta.css'
 export const CreateOferta = () => {
     const user = useSelector(state=>state.user)
+    const {quill, quillRef} =useQuill({
+        modules:{
+            toolbar:toolbar
+        }
+    })
+    const paises = ["Colombia", "Peru", "Chile", "Mexico", "Argentina"];
+    const categorias = ["Bebidas", "Ropa", "Comida", "Automotriz", "Otros"];
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [oferta, setOferta] = useState({
         title:'',
         redsocial:'',
         pais:'',
-        description:'',
-        requisitos:''
+        categoria:''
     })
     const handleChange = (e)=>{
         const {name, value} = e.target
@@ -17,20 +33,71 @@ export const CreateOferta = () => {
             [name]:value,
         })
     }
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault()
-        crearOferta(user.userId, oferta)
+        const data = {
+            ...oferta,
+            description: JSON.stringify(quill.getContents())
+        }
+        try {
+        const ofertas = await crearOferta(user.userId, user.nameMarca, user.photoURL, data)
+        dispatch(addOferta(ofertas))
+        Swal.fire({
+            title: "success",
+            text: "Oferta Publicada",
+            icon: "Success"
+          });
+        navigate('/')
+        } catch (error) {
+            throw error
+        }
+        
     }
   return (
-    <div>
-        <form action="">
-            <input type="text" name='title' placeholder='Title' />
-            <input type="text" name='redsocial' placeholder='Red social' />
-            <input type="text" name='pais' placeholder='Pais' />
-            <input type="text" name='description' placeholder='Descripcion' />
-            <input type="text" name='requisitos' placeholder='Requisitos' />
-            <button type='submit'>Crear</button>
+    <div className='center'>
+        <div className='container-createOferta'>
+        <div className='createOferta'>
+        <h1>Crear Oferta</h1>
+        <form className='createOferta_form' action="" onSubmit={handleSubmit}>
+            <div  className='form_group form_group_CreateOferta'>
+                <label htmlFor="">Title:</label>
+                <input className='input' onChange={handleChange} type="text" name='title' placeholder='Title' required />
+            </div>
+            <div className='form_group form_group_CreateOferta'>
+                <label htmlFor="">Red Social:</label>
+                <input className='input' onChange={handleChange} type="text" name='redsocial' placeholder='Red social' required />
+            </div>
+            
+            <div className='form_group form_group_CreateOferta'>
+              <label htmlFor="pais">País:</label>
+              <select className='input' onChange={handleChange} name="pais" required>
+                <option value="" disabled selected>Selecciona un país</option>
+                {paises.map((pais, index) => (
+                  <option key={index} value={pais}>
+                    {pais}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className='form_group form_group_CreateOferta'>
+              <label htmlFor="categoria">Categoría:</label>
+              <select className='input' onChange={handleChange} name="categoria" required>
+                <option value="" disabled selected>Selecciona una categoría</option>
+                {categorias.map((categoria, index) => (
+                  <option key={index} value={categoria}>
+                    {categoria}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className='createoferta_description'>
+                <div className='description-oferta' ref={quillRef}>
+                </div>
+            </div>
+            <button className='btn btn-createOferta' type='submit'>Publicar Oferta</button>
         </form>
+    </div>
+    </div>
     </div>
   )
 }

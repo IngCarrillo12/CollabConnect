@@ -3,9 +3,10 @@ import "./Header.css"
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserMenu } from '../menuUser/UserMenu'
-import { addUser } from '../../redux/userSlice'
+import { addUser, resetUser } from '../../redux/userSlice'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../fireBase'
+import { getUserById } from '../../resources/Auth'
 
 export const Header = () => {
     const navigate = useNavigate()
@@ -15,20 +16,26 @@ export const Header = () => {
     const handleCreateOfert = ()=>{
         navigate('/creatingOfert')
     }
+    const findUser = async(currentUser)=>{
+        const user = await getUserById(currentUser.uid)
+        dispatch(addUser(user))
+    }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if(currentUser)dispatch(addUser(currentUser));
+            if(currentUser){
+               findUser(currentUser)
+            }
         });
-    
         return () => unsubscribe();
       }, [dispatch]);
     
   return (
     <header className='header'>
-        <div className='header_logo-title'>
+        <div className='header_info'>
+        <Link to={'/'} className='header_logo-title'>
             <img className='header_logo' src="https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg" alt="Logo" />
             <h3 className='header_title'>CollabConnect</h3>
-        </div>
+        </Link>
             <form action="" className='form-search'>
                 <div className='form-search_group'>
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
@@ -38,6 +45,14 @@ export const Header = () => {
                 </div>
                 <button className='form-search_btn btn' type="submit">Search</button>
             </form>
+            <nav className='header_nav'>
+                <ul>
+                    <li><Link className='Link'>Creadores</Link></li>
+                    <li><Link className='Link'>Marcas</Link></li>
+                    <li><Link className='Link'>Ofertas Colaboraciones</Link></li>
+                    <li><Link className='Link'>Ayuda</Link></li>
+                </ul>
+            </nav>
             <div className='header_btnsAuth'>
                 {
                     !user.email?(
@@ -51,12 +66,12 @@ export const Header = () => {
                         <img width="50" onClick={()=>setOpenMenu(!openMenu)} height="50" src={user.photoURL} alt="user-male-circle"/>
                        {
                         user.marca&&(
-                           <button onClick={handleCreateOfert} className='btn'>Crear Oferta</button> 
+                           <button onClick={handleCreateOfert} className='btn btn-crearOferta'>Crear Oferta</button> 
                         )
                        }
                         {
                             openMenu&&(
-                                <UserMenu name={user.nombre} email={user.email} image={user.photoURL} setOpenMenu={setOpenMenu}/>
+                                <UserMenu name={user.nameMarca} email={user.email} image={user.photoURL} setOpenMenu={setOpenMenu}/>
                             )
                            
                         }
@@ -66,6 +81,8 @@ export const Header = () => {
                 }
                 
             </div>
+            </div>
+           
     </header>
   )
 }

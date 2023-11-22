@@ -1,23 +1,30 @@
 .header{
+    display: flex;
+    flex-direction: column;
+}
+.header_info{
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid #000;
     height: 70px;
+    background-color:var(--color-verde);
 }
 .header_logo-title{
     display: flex;
     align-items: center;
     justify-content: center;
     gap: .5rem;
+    text-decoration: none;
+    color:var(--color-letras);
+    text-shadow: 0px 0px 3px var(--color-letras);
 }
 .header_logo{
     width: 32px;
     border-radius: 50%;
 }
 .header_title{
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 .form-search{
@@ -28,7 +35,7 @@
 .form-search_group{
     display: flex;
     align-items: center;
-    border: 1px solid #000;
+    border: 2px solid var(--color-blanco);
     border-radius: 15px;
     padding: .2rem 1rem;
     height: 35px;
@@ -41,19 +48,43 @@
     border: none;
     height: 90%;
     width: 100%;
+    background-color: transparent;
+    color: var(--color-blanco);
 }
 .form-search_group input:focus{
     outline: none;
 }
-.btn{
-    padding: .5rem 1rem;
-    border-radius: 15px;
-    font-weight: 700;
+
+.header_btnsAuth_btn-login{
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-blanco);
+    color: var(--color-verde);
+    transition: all ease-in-out .4s;
+}
+.header_btnsAuth_btn-login:hover{
+    background-color: transparent;
+    color: var(--color-blanco);
+}
+.header_btnsAuth_btn-register{
+    border: 1px solid var(--color-blanco);
+    background-color: transparent;
+    color: var(--color-blanco);
+    transition: all ease-in-out .4s;
+}
+
+.header_btnsAuth_btn-register:hover{
+    background-color: var(--color-blanco);
+    color: var(--color-verde);
 }
 .form-search_btn{
-    border: 1px solid blue;
-    background-color: #fff;
-    color: blue;
+    border: 1px solid var(--color-blanco);
+    background-color: var(--color-blanco);
+    color: var(--color-verde);
+    transition: all ease-in-out .4s;
+}
+.form-search_btn:hover{
+    background-color: transparent;;
+    color: var(--color-blanco);
 }
 .header_btnsAuth{
     display: flex;
@@ -66,12 +97,49 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .userAuth img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 1px solid #000;
+    border: 1px solid var(--color-verde);
     padding: .5rem;
-    background-color: #fff;
+    background-color: var(--color-blanco);
+}
+.header_nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header_nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1.3rem;
+    list-style: none;
+    width: 100%;
+    padding: .5rem;
+    font-weight: 500;
+}
+.header_nav ul .Link{
+   text-decoration: none;
+   color: var(--color-blanco);
+   transition: all ease-in-out .3s;
+}
+.header_nav ul .Link:hover{
+    text-decoration: underline 2px !important;
+    text-shadow: 0px 0px 3px var(--color-verde);
+}
+.btn-crearOferta{
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-blanco);
+    color: var(--color-verde);
+    font-weight: 700;
+    margin-left: .5rem;
+    transition: all ease-in-out .3s;
+}
+.btn-crearOferta:hover{
+    color: var(--color-blanco);
+    background-color: transparent;
 }
