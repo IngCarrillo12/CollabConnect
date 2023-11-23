@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import { getAllUsers } from '../../resources/Auth'
 import { useNavigate } from 'react-router-dom'
 export const HomePage = () => {
-  location.reload();
   const ofertas = useSelector(state=> state.ofertas)
   const user = useSelector(state=>state.user)
   const [quantyMarcas, setQuantyMarcas] = useState(0)
