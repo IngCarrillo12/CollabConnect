@@ -82,7 +82,7 @@ export const FormularioMarca = () => {
             <ReactQuill value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
             </div>
         
-        <button className='btn' type="submit">Guardar</button>
+        <button className='btn btn-guardar' type="submit">Guardar</button>
       </form>
     </div>
     </div>
