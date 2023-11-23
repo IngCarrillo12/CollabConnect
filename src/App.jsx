@@ -11,7 +11,7 @@ import { EditPerfil } from './components/EditPerfil/EditPerfil.jsx'
 import { FormularioMarca } from './components/FormularioPerfil/FormularioMarca.jsx'
 import { RegisterInfluencer } from './components/Register/RegisterInfluencer.jsx'
 import { addUser } from './redux/userSlice.js'
-import { onAuthStateChanged, reload } from 'firebase/auth';
+import { onAuthStateChanged} from 'firebase/auth';
 import { auth } from './fireBase.js'
 import { getUserById } from './resources/Auth.js'
 import { useDispatch } from 'react-redux'
