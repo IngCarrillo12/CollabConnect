@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './styleCreateOferta.css'
+import toolbar from '../../toolbar'
 export const CreateOferta = () => {
     const user = useSelector(state=>state.user)
   const [quillValue, setQuillValue] = useState('');
