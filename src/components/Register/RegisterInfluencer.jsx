@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { addUser } from '../../redux/userSlice'
 import Swal from "sweetalert2"
 
-export const Register = () => {
+export const RegisterInfluencer = () => {
   const [user, setUser] = useState({firstName:'', lastName: "", birthday:{day:null,month:null,year:null}, marca:false, email:"", password:""})
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -16,14 +16,8 @@ export const Register = () => {
   const regexNombre = /^[A-Za-z]+$/;
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (type === 'checkbox') {
-      // Manejar cambios en el checkbox
-      setUser((prevUser) => ({
-        ...prevUser,
-        [name]: checked,
-      }));
-    } else if (name === 'day' || name === 'month' || name === 'year') {
+    const { name, value } = e.target;
+   if (name === 'day' || name === 'month' || name === 'year') {
       setUser((prevUser) => ({
         ...prevUser,
         birthday: {
@@ -117,17 +111,6 @@ export const Register = () => {
         <input onChange={handleChange} type="password" name='password' className="input" placeholder="*******"/>
         <label className='message-info' htmlFor="">Debe tener min 6 caracteres</label>
         </div>
-        <div className="form_group checkbox">
-              <label htmlFor="marca">Eres una Marca?</label>
-              <input
-                onChange={handleChange}
-                type="checkbox"
-                name="marca"
-                className="input"
-                checked={user.marca}
-              />
-            </div>
-            <label className='message-info' htmlFor="">Al no marcar que eres marca asumiremos que eres influencer</label>
         <button className="form-btn" type='submit'>Sign Up</button>
         </form>
       <p className="sign-up-label">

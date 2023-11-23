@@ -7,7 +7,7 @@ export const ofertasSlice = createSlice({
     initialState,
     reducers:{
         addOferta:(state, action)=>{
-            state.push(action.payload)
+            state.push(...action.payload)
         },
         resetOferta:(state,action)=>{
             return []

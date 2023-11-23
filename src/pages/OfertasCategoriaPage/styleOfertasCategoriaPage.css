@@ -1,0 +1,15 @@
+.ofertasCategoriaPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.ofertasCategoriaPage_message{
+    margin: 2rem;
+    font-size: 2rem;
+    color: var(--color-letras);
+    text-shadow: 0 0 3px var(--color-letras);
+    border-bottom: 2px solid var(--color-verde);
+}

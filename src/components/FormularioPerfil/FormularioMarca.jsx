@@ -10,7 +10,7 @@ import './styleFormularios.css'
 export const FormularioMarca = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const [updateUser, setUpdateUser] = useState({ instagram: '', description: '', pais: '', nameMarca:''});
+  const [updateUser, setUpdateUser] = useState({ instagram: '', description: '', pais: ''});
   const [image, setImage] = useState(null);
   const {quill, quillRef} =useQuill({
         modules:{
@@ -61,10 +61,6 @@ export const FormularioMarca = () => {
           <input className='input input-formPerfil' onChange={handleChange} type="text" name="instagram" placeholder="@CandyFiesta" />
         </div>
         <div className='form_group form_group-formPerfil'>
-          <label htmlFor="marca">Nombre de marca:</label>
-          <input className='input input-formPerfil' onChange={handleChange} type="text" name="nameMarca" placeholder="Gatorade" />
-        </div>
-        <div className='form_group form_group-formPerfil'>
               <label htmlFor="pais">País:</label>
               <select className='input input-formPerfil' onChange={handleChange} name="pais" required>
                 <option value="" disabled selected>Selecciona un país</option>
@@ -80,7 +76,9 @@ export const FormularioMarca = () => {
           <label htmlFor="image">Subir Imagen</label>
           <input onChange={handleImageChange} type="file" name="image" required />
         </div>
-            <label htmlFor="">Description</label>
+        <div className='form_group'>
+        <label htmlFor="">Description</label>
+        </div>
             <div className='createoferta_description'>
                 <div className='description-oferta' ref={quillRef}>
                 </div>

@@ -1,8 +1,8 @@
 import {createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup ,updateProfile, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { collection } from 'firebase/firestore';
-import {doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
+import {doc, setDoc, updateDoc, getDoc, getDocs } from "firebase/firestore";
 import { auth, db } from "../fireBase";
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject, getMetadata } from 'firebase/storage';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Swal from "sweetalert2"
 
 const validatedError = (error)=>{
@@ -44,16 +44,18 @@ const validatedError = (error)=>{
   }
 }
 export const signUp = async (userInfo) => {
-  const { email, password, firstName, lastName, birthday,marca } = userInfo;
+  const { email, password, firstName, lastName, birthday, marca, razonsocial, nit } = userInfo;
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+    if(!marca){
     try {
       await updateProfile(user, {
         displayName:`${firstName} ${lastName}`,
       });
       const userId = user.uid;
       const userData = {
+        userId,
         email,
         firstName,
         lastName,
@@ -69,9 +71,36 @@ export const signUp = async (userInfo) => {
       } catch (error) {
         validatedError(error.code)
       }
-    } catch (error) {
+    }catch (error) {
       validatedError(error.code)
     }
+  }
+  if(marca){
+    try {
+      await updateProfile(user, {
+        displayName: razonsocial,
+      });
+      const userId = user.uid;
+      const userData = {
+        userId,
+        email,
+        nameMarca:razonsocial,
+        nit,
+        marca,
+      };
+
+      // Guardar los datos en Firestore
+      const userDocRef = doc(db, 'users', userId);
+      try {
+        await setDoc(userDocRef, userData);
+        return {...userData,userId};
+      } catch (error) {
+        validatedError(error.code)
+      }
+    }catch (error) {
+      validatedError(error.code)
+    }
+  }
   } catch (error) {
     validatedError(error.code)
   }
@@ -167,4 +196,15 @@ export const subirImagen = async (userId, image) => {
     console.error('Error al subir la imagen:', error);
     throw error; // Puedes manejar este error según tus necesidades
   }
+};
+export const getAllUsers = async () => {
+  const usersCollection = collection(db, 'users');
+  const usersSnapshot = await getDocs(usersCollection);
+
+  const users = [];
+  usersSnapshot.forEach((doc) => {
+    users.push(doc.data());
+  });
+
+  return users;
 };

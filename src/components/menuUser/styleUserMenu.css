@@ -55,3 +55,8 @@
     color: var(--color-verde);
     font-weight: 700;
 }
+@media (max-width:768px){
+    .userMenu{
+        left: -2rem;
+    }
+}

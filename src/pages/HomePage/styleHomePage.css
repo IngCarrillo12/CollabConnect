@@ -125,19 +125,26 @@
     width: 100%;
     list-style: none;
 }
-.img-adidas{
-    width: 200px;
-    height: 80px;
+.partners_list li{
+    width: 10%;
 }
-.img-coca{
-    width: 247px;
-    height: 80px;
+.partners_list li img{
+    width: 100%;
 }
-.img-nike{
-    width: 140px;
-    height: 80px;
+
+@media (max-width:768px){
+    .about_estadisticas{
+        width: 100%;
+    }
+    .partners{
+         border-radius: 0px;
+    }
+    .partners_list .img{
+        width: 100%;
+    }
 }
-.img-gatorade{
-    width: 140px;
-    height: 80px;
+@media (min-width: 768px) and (max-width: 1050px) {
+    .about_estadisticas{
+        width: 70%;
+    }
 }

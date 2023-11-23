@@ -1,0 +1,19 @@
+.optionsRegister{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    top: 2.5rem;
+    right: -1rem;
+    background-color: var(--color-verde);
+    border: 2px solid var(--color-letras);
+    padding: 1rem;
+    border-radius: 15px;
+}
+.optionsRegister a{
+    text-decoration: none;
+    color: var(--color-blanco);
+}
+

@@ -63,7 +63,7 @@ export const OfertaPage = () => {
                     <img src={oferta.marca.photoURL} alt="foto marca" />
                 </div>
                 <div className='infoMarca_red-fecha'>
-                    <h3>{`${oferta.marca.firstName} ${oferta.marca.lastName}`}</h3>
+                    <h3>{oferta.marca.nameMarca}</h3>
                     <span>{`${fecha.getDate()} / ${fecha.getMonth()} / ${fecha.getFullYear()}`}</span>
                 </div>
             </div>
@@ -85,7 +85,9 @@ export const OfertaPage = () => {
                 }
                 
             </div>
+            
             <div className='oferta_description'>
+            <h2>Description:</h2>
                 <article  ref={quillRef}>
 
                 </article>

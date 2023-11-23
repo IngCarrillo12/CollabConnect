@@ -45,3 +45,14 @@
     background-color: transparent;
     color: var(--color-verde);
 }
+@media (max-width:1000px){
+    .createOferta{
+        width: 100%;
+    }
+    .createOferta_form{
+        flex-direction: column;
+    }
+    .form_group_CreateOferta{
+        width: 100%;
+    }
+}

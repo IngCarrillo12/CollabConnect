@@ -1,0 +1,112 @@
+
+.listCards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 3rem 1rem;
+    background-color:transparent;
+}
+.container-listCards{
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+}
+.listCards_header{
+    border-bottom: 2px solid var(--color-verde);
+}
+.listCards_header{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-letras);
+    text-shadow: 0px 0px 3px var(--color-letras);
+}
+.cards{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 2rem;
+}
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+    border-radius: 25px;
+    width: 100%;
+    border: 1px solid var(--color-verde);
+    background-color: var(--color-verde);;
+    color: var(--color-letras);
+    text-decoration: none;
+    box-shadow: 0px 0px 25px var(--color-verde);
+
+}
+.card:hover{
+    background-color: var(--color-fondo);
+    color: var(--color-verde);
+}
+
+.card_img{
+    width: 70px;
+}
+.card_img img{
+    width: 100%;
+    height: 50px;
+    border-radius: 50%;
+}
+
+@media (max-width:631px){
+    .cards{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .card{
+        flex-direction: column;
+    }
+    .card_contenido{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: .2rem;
+    }
+    .card_red-social{
+        padding: .5rem 0;
+    }
+    .card_fecha-pais{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: .5rem;
+    }
+}
+@media (min-width:631px) and (max-width:949px){
+    .cards{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card{
+        flex-direction: column;
+    }
+    .card_contenido{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: .2rem;
+    }
+    .card_red-social{
+        padding: .5rem 0;
+    }
+    .card_fecha-pais{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: .5rem;
+    }
+}
+@media (min-width:950px) and (max-width:1050px){
+    .cards{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+}

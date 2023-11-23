@@ -1,56 +1,63 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import "./Header.css"
-import { useNavigate, Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { UserMenu } from '../menuUser/UserMenu'
-import { addUser, resetUser } from '../../redux/userSlice'
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../fireBase'
-import { getUserById } from '../../resources/Auth'
+import { OptionsRegister } from '../OptionsRegister/OptionsRegister.jsx'
 
 export const Header = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const location = useLocation();
     const user = useSelector(state => state.user)
     const [openMenu, setOpenMenu] = useState(false)
-    const handleCreateOfert = ()=>{
-        navigate('/creatingOfert')
+    const [valueSearch, setValueSearch] = useState('')
+    const [currentPage, setCurrentPage] = useState('');
+    const [optionsRegister, setOptionsRegister] = useState(false)
+    const handleOptionsRegister = (e)=>{
+        e.stopPropagation();
+        setOptionsRegister(!optionsRegister)
     }
-    const findUser = async(currentUser)=>{
-        const user = await getUserById(currentUser.uid)
-        dispatch(addUser(user))
+    const handleCreateOfert = ()=>{
+        navigate('/crearOferta')
+    }
+    const handleSearchChange = (e)=>{
+        setValueSearch(e.target.value)
+    }
+    const handleSubmitSearch = (e)=>{
+        e.preventDefault();
+        navigate(`/ofertas/${valueSearch}`);
+        setValueSearch('')
+    }
+    const handlePerfil =(e)=>{
+        e.stopPropagation();
+        setOpenMenu(!openMenu)
     }
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if(currentUser){
-               findUser(currentUser)
-            }
-        });
-        return () => unsubscribe();
-      }, [dispatch]);
+        const path = location.pathname.split('/')[1];
+        setCurrentPage(path);
+        
+    }, [location])
+    
     
   return (
-    <header className='header'>
-        <div className='header_info'>
+
+        <header className='header_info'>
         <Link to={'/'} className='header_logo-title'>
-            <img className='header_logo' src="https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg" alt="Logo" />
+            <img className='header_logo' src="/Logo-CollabConnect.webp" alt="Logo" />
             <h3 className='header_title'>CollabConnect</h3>
         </Link>
-            <form action="" className='form-search'>
+            <form action="" onSubmit={handleSubmitSearch} className='form-search'>
                 <div className='form-search_group'>
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
-                        <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
-                </svg>
-                    <input type="text" />
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAByklEQVR4nNWUvWsVURDF1wgqREvBRrQIEu0VUliI1oJiZZFCwUTQRvwD/IgfQTsVLPwPRBBMYyPYaGdlJ2IjFoEgPN85Z2b9GLlvrxGevrd3jUE8sN3Z85s7c+9U1b8UyZ0unXLokkNXa+ismU2vOdjM9jm5ZOA3p2L4M+plTR78s3DghIHIYR+MvCfoXA2dceiWg28GEPCLkRc7hUs6YuBnA786dDkitgx7ImJjDc0ZqARK4KLwiJhMFZf+pJ/FGMldrQAjL+S2PCqqqKoqh242M+H9dgD0YlA9OVMKiF5vezMLLafWjTZGbEg9NfBTREyUApKMepUKk7S7GqWI2DZoD/i26ignl5q54cA4wMRgYNRKV4Dl1rY+QCNfZ+Pe0vCImDSQBvYjYtNYs0PXmlvEO6UAQefzzXvYau73+zvSkA2sJR1q85vZHiM/pkdZA/uLKqqh+bwGegYcG+kjZ5x633j1vOoih66sLjnwmUunU2Cq0smT6SH+sgSh650gBhx38N3vNmnepitOPh6C3OgEiYjNBjvq5F0nnzj41MAHTs5GxNZ82sU1QUrk0MIQ5PZ/C1lcnREISVPrAVnI4Yf/evgPrUvl4/Qd5uJR/W64uyQAAAAASUVORK5CYII="/>
+                    <input type="text" value={valueSearch} onChange={handleSearchChange} />
                 </div>
                 <button className='form-search_btn btn' type="submit">Search</button>
             </form>
             <nav className='header_nav'>
                 <ul>
-                    <li><Link className='Link'>Creadores</Link></li>
-                    <li><Link className='Link'>Marcas</Link></li>
-                    <li><Link className='Link'>Ofertas Colaboraciones</Link></li>
-                    <li><Link className='Link'>Ayuda</Link></li>
+                    <li><Link to={'/influencers'} className={currentPage === 'influencers' ? 'active' : ''}>Influencers</Link></li>
+                    <li><Link to={'/marcas'} className={currentPage === 'marcas' ? 'active' : ''}>Marcas</Link></li>
+                    <li><Link to={'/ofertas'} className={currentPage === 'ofertas' ? 'active' : ''}>Ofertas</Link></li>
                 </ul>
             </nav>
             <div className='header_btnsAuth'>
@@ -58,31 +65,35 @@ export const Header = () => {
                     !user.email?(
                         <>
                         <button onClick={()=>navigate('/login')} className='header_btnsAuth_btn-login btn'>Login</button>
-                        <button onClick={()=>navigate('/register')} className='header_btnsAuth_btn-register btn' >Register</button>
+                        <button onClick={handleOptionsRegister} className='header_btnsAuth_btn-register btn' >Register</button>
+                        {
+                     optionsRegister&&(
+                        <OptionsRegister setOptionsRegister={setOptionsRegister}/>
+                    )
+                }
                         </>
                         
                     ):(
                         <div className='userAuth'>
-                        <img width="50" onClick={()=>setOpenMenu(!openMenu)} height="50" src={user.photoURL} alt="user-male-circle"/>
+                        <img width="50" onClick={handlePerfil} height="50" src={user.photoURL} alt="user-male-circle"/>
                        {
                         user.marca&&(
                            <button onClick={handleCreateOfert} className='btn btn-crearOferta'>Crear Oferta</button> 
                         )
                        }
+                       
                         {
                             openMenu&&(
-                                <UserMenu name={user.nameMarca} email={user.email} image={user.photoURL} setOpenMenu={setOpenMenu}/>
+                                <UserMenu marca={user.marca}  name={user.nameMarca || `${user.firstName} ${user.lastName}`} email={user.email} image={user.photoURL} setOpenMenu={setOpenMenu}/>
                             )
-                           
                         }
+                        
                        
                          </div>
                     )
                 }
                 
             </div>
-            </div>
-           
-    </header>
+            </header>
   )
 }
