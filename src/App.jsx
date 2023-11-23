@@ -20,11 +20,11 @@ import { OfertasPage } from './pages/ofertasPage/OfertasPage.jsx';
 import { obtenerTodasLasOfertas } from './resources/OfertasColaboracion.js';
 import { MarcasPage } from './pages/MarcasPage/MarcasPage.jsx';
 import { InfluencersPage } from './pages/InfluencersPage/InfluencersPage.jsx';
-
 import { addOferta, resetOferta } from './redux/ofertasSlice.js'
 import { OfertasCategoriaPage } from './pages/OfertasCategoriaPage/OfertasCategoriaPage.jsx'
 import { MisPostulacionesPage } from './pages/MisPostulacionesPage/MisPostulacionesPage.jsx'
 import { MisOfertasPublicadas } from './pages/MisOfertasPublicadas/MisOfertasPublicadas.jsx'
+import { ViewUserPage } from './pages/viewUserPage/viewUserPage.jsx';
 
 function App() {
   const dispatch = useDispatch()
@@ -80,6 +80,7 @@ useEffect(() => {
         <Route path='/marcas' element={<MarcasPage/>}/>
         <Route path='/influencers' element={<InfluencersPage/>}/>
         <Route path='/oferta/:id' element={<OfertaPage/>}/>
+        <Route path='/viewUser/:id' element={<ViewUserPage/>}/>
         <Route path='/editperfil' element={<EditPerfil/>}/>
         <Route path="/login" element={<Login />}/>
         <Route path="*" element={<Navigate to="/" />} />
