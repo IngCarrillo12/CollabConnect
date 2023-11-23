@@ -4,17 +4,15 @@ import { crearOferta } from '../../resources/OfertasColaboracion'
 import { addOferta } from '../../redux/ofertasSlice'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import { useQuill } from 'react-quilljs'
-import 'quill/dist/quill.snow.css'
-import toolbar from '../../toolbar'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import './styleCreateOferta.css'
 export const CreateOferta = () => {
     const user = useSelector(state=>state.user)
-    const {quill, quillRef} =useQuill({
-        modules:{
-            toolbar:toolbar
-        }
-    })
+  const [quillValue, setQuillValue] = useState('');
+  const modules = {
+    toolbar: toolbar,
+  };
     const paises = ["Colombia", "Peru", "Chile", "Mexico", "Argentina"];
     const categorias = ["Bebidas", "Ropa", "Comida", "Automotriz", "Otros"];
 
@@ -37,7 +35,7 @@ export const CreateOferta = () => {
         e.preventDefault()
         const data = {
             ...oferta,
-            description: JSON.stringify(quill.getContents())
+            description: JSON.stringify(quillValue)
         }
         try {
         const ofertas = await crearOferta(user.userId, user.nameMarca, user.photoURL, data)
@@ -91,8 +89,7 @@ export const CreateOferta = () => {
               </select>
             </div>
             <div className='createoferta_description'>
-                <div className='description-oferta' ref={quillRef}>
-                </div>
+               <ReactQuill readOnly={!edit} value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
             </div>
             <button className='btn btn-createOferta' type='submit'>Publicar Oferta</button>
         </form>
