@@ -5,7 +5,7 @@ import { Loader } from '../../components/Loader'
 import './styleViewUserPage.css'
 import { CardViewUser } from '../../components/cardViewUser/cardViewUser'
 
-export const ViewUserPage = () => {
+export const UserPage = () => {
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
     const {id} = useParams()

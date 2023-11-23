@@ -24,7 +24,7 @@ import { addOferta, resetOferta } from './redux/ofertasSlice.js'
 import { OfertasCategoriaPage } from './pages/OfertasCategoriaPage/OfertasCategoriaPage.jsx'
 import { MisPostulacionesPage } from './pages/MisPostulacionesPage/MisPostulacionesPage.jsx'
 import { MisOfertasPublicadas } from './pages/MisOfertasPublicadas/MisOfertasPublicadas.jsx'
-import { ViewUserPage } from './pages/viewUserPage/viewUserPage.jsx';
+import { UserPage } from './pages/UserPage/UserPage.jsx'
 
 function App() {
   const dispatch = useDispatch()
@@ -69,6 +69,7 @@ useEffect(() => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register/marca" element={<RegisterMarca />}/>
+        <Route path='/viewUser/:id' element={<UserPage/>}/>
         <Route path="/register/influencer" element={<RegisterInfluencer />}/>
         <Route path='/formulario/marca' element={<FormularioMarca/>}/>
         <Route path='/formulario/influencer' element={<FormularioInfluencer/>}/>
@@ -80,7 +81,6 @@ useEffect(() => {
         <Route path='/marcas' element={<MarcasPage/>}/>
         <Route path='/influencers' element={<InfluencersPage/>}/>
         <Route path='/oferta/:id' element={<OfertaPage/>}/>
-        <Route path='/viewUser/:id' element={<ViewUserPage/>}/>
         <Route path='/editperfil' element={<EditPerfil/>}/>
         <Route path="/login" element={<Login />}/>
         <Route path="*" element={<Navigate to="/" />} />
