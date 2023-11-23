@@ -5,7 +5,7 @@ import { collection, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../fireBase';
 import './EditPerfil.css'
 import { useQuill } from 'react-quilljs'
-
+import 'quill/dist/quill.snow.css'
 import Swal from "sweetalert2"
 
 export const EditPerfil = () => {
@@ -145,7 +145,7 @@ const handleEdit = async() => {
      
     
     fetchPhotoURL();
-  }, [user, db, quill]);
+  }, [user, db]);
   
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
