@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { obtenerOfertaPorId, postularseAOferta } from '../../resources/OfertasColaboracion'
 import { Loader } from '../../components/Loader'
 import { useSelector } from 'react-redux'
-import { useQuill } from 'react-quilljs'
-import 'quill/dist/quill.snow.css'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import './styleOfertaPage.css'
 export const OfertaPage = () => {
    const user = useSelector(state=>state.user)
@@ -13,12 +13,10 @@ export const OfertaPage = () => {
     const [oferta, setOferta] = useState()
     const [loading, setLoading] = useState(true)
     const [postulado, setPostulado] = useState(false)
-    const {quill, quillRef} =useQuill({
-        readOnly: true,
-        modules:{
-            toolbar: false
-        }
-    })
+    const [quillValue, setQuillValue] = useState('');
+    const modules = {
+      toolbar: false,
+    };
     const handlePostularse = async()=>{
         if(user.userId){
             const response = await postularseAOferta(id,user.userId)
@@ -46,11 +44,11 @@ export const OfertaPage = () => {
             if(encontrado){
                 setPostulado(true)
             }
-            const description = oferta.oferta.description
-            quill.setContents(JSON.parse(description))
+            const description = await oferta.oferta.description
+            setQuillValue(JSON.parse(description))
         }
       loadOferta(id)
-    }, [id,quill])
+    }, [id])
   return (
     <main className='center'>
         {
@@ -88,9 +86,7 @@ export const OfertaPage = () => {
             
             <div className='oferta_description'>
             <h2>Description:</h2>
-                <article  ref={quillRef}>
-
-                </article>
+            <ReactQuill value={quillValue} modules={modules} theme='snow'/>
             </div>
             </div>
             )
