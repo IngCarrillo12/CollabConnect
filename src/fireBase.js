@@ -8,12 +8,18 @@ import { getStorage } from 'firebase/storage'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDDEwMREyDbbOMrZ0CV0Ay1CgJDVa2EA00",
-  authDomain: "collabconnects.firebaseapp.com",
-  projectId: "collabconnects",
-  storageBucket: "collabconnects.appspot.com",
-  messagingSenderId: "793085216831",
-  appId: "1:793085216831:web:3d8e8fe3afd5f28d59508a"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  // apiKey: "AIzaSyDDEwMREyDbbOMrZ0CV0Ay1CgJDVa2EA00",
+  // authDomain: "collabconnects.firebaseapp.com",
+  // projectId: "collabconnects",
+  // storageBucket: "collabconnects.appspot.com",
+  // messagingSenderId: "793085216831",
+  // appId: "1:793085216831:web:3d8e8fe3afd5f28d59508a"
 };
 
 // Initialize Firebase
