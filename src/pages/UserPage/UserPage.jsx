@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { getUserById } from '../../resources/Auth'
 import { Loader } from '../../components/Loader'
 import './styleViewUserPage.css'
-import { CardViewUser } from '../../components/cardViewUser/CardViewUser.jsx'
+import { CardVistaUser } from '../../components/CardUser/CardVistaUser.jsx'
 
 export const UserPage = () => {
     const [user, setUser] = useState()
@@ -24,7 +24,7 @@ export const UserPage = () => {
             loading?(
                 <Loader/>
             ):(
-            <CardViewUser user={user}/>
+            <CardVistaUser user={user}/>
             )
         }
         

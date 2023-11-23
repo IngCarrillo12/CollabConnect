@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './styleCardViewUser.css'
 import { useQuill } from 'react-quilljs'
 import 'quill/dist/quill.snow.css'
-export const CardViewUser = ({user}) => {
+export const CardVistaUser = ({user}) => {
     const {quill, quillRef} =useQuill({
         readOnly: true,
         modules:{
