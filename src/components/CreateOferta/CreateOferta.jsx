@@ -90,7 +90,7 @@ export const CreateOferta = () => {
               </select>
             </div>
             <div className='createoferta_description'>
-               <ReactQuill readOnly={!edit} value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
+               <ReactQuill value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
             </div>
             <button className='btn btn-createOferta' type='submit'>Publicar Oferta</button>
         </form>
