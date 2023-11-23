@@ -1,27 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './styleCardViewUser.css'
-import { useQuill } from 'react-quilljs'
-import 'quill/dist/quill.snow.css'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 export const CardVistaUser = ({user}) => {
-    const {quill, quillRef} =useQuill({
-        readOnly: true,
-        modules:{
-            toolbar: false
-        }
-    })
+  const [quillValue, setQuillValue] = useState('');
+  const modules = {
+    toolbar: false,
+  };
     const loadDescription = async () => {
-        if (quill && quillRef.current) {
           const data = await user.description;
           const description = await JSON.parse(data);
-          quill.setContents([]);
-    
-          // Establece el nuevo contenido
-          quill.setContents(description);
-        }
+          setQuillValue(description)
+        
       };
     useEffect(() => {
       loadDescription()
-    }, [quill,user])
+    }, [user])
     
   return (
     <div className='editPerfil'>
@@ -81,8 +75,7 @@ export const CardVistaUser = ({user}) => {
               </div>
               <div className='createoferta_description'>
               <label>Descripcion</label>
-              <div className='description-oferta' ref={quillRef}>
-              </div>
+              <ReactQuill value={quillValue} modules={modules} theme='snow'/>
           </div>
           </div>
           </div>

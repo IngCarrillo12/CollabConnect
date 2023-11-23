@@ -6,8 +6,7 @@ import { db } from '../../fireBase';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './EditPerfil.css'
-import { useQuill } from 'react-quilljs'
-
+import toolbar from '../../toolbar'
 import Swal from "sweetalert2"
 
 export const EditPerfil = () => {
@@ -24,7 +23,7 @@ export const EditPerfil = () => {
   const paises = ["Colombia", "Chile", "Mexico", "Argentina", "Uruguay"];
   const [quillValue, setQuillValue] = useState('');
   const modules = {
-    toolbar: !edit ? false : { container: [['bold', 'italic', 'underline', 'strike'], ['link']] },
+    toolbar: toolbar,
   };
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -221,7 +220,7 @@ const handleEdit = async() => {
                 </div>
                 <div className='createoferta_description'>
                 <label>Descripcion</label>
-                <ReactQuill value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
+                <ReactQuill readOnly={!edit} value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
             </div>
             </>
                 ):(
@@ -259,8 +258,7 @@ const handleEdit = async() => {
         </div>
         <div className='createoferta_description'>
                 <label>Descripcion</label>
-                <div className='description-oferta' ref={quillRef}>
-                </div>
+                <ReactQuill readOnly={!edit} value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
             </div>
                   </>
                 )

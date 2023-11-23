@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { actualizarFirestore, subirImagen } from '../../resources/Auth';
 import { useNavigate } from 'react-router-dom';
-import { useQuill } from 'react-quilljs'
-import 'quill/dist/quill.snow.css'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import toolbar from '../../toolbar'
 import './styleFormularios.css'
 
@@ -12,11 +12,10 @@ export const FormularioMarca = () => {
   const navigate = useNavigate();
   const [updateUser, setUpdateUser] = useState({ instagram: '', description: '', pais: ''});
   const [image, setImage] = useState(null);
-  const {quill, quillRef} =useQuill({
-        modules:{
-            toolbar:toolbar
-        }
-    })
+  const [quillValue, setQuillValue] = useState('');
+  const modules = {
+    toolbar: toolbar,
+  };
   const paises = ["Colombia", "Chile", "Mexico", "Argentina", "Uruguay"];
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +36,7 @@ export const FormularioMarca = () => {
       if (image) {
         const data = {
           ...updateUser,
-          description: JSON.stringify(quill.getContents())
+          description: JSON.stringify(quillValue)
       }
         const newImageUrl = await subirImagen(user.userId, image);
         await actualizarFirestore(user.userId,{...data,photoURL:newImageUrl} );
@@ -80,8 +79,7 @@ export const FormularioMarca = () => {
         <label htmlFor="">Description</label>
         </div>
             <div className='createoferta_description'>
-                <div className='description-oferta' ref={quillRef}>
-                </div>
+            <ReactQuill value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
             </div>
         
         <button className='btn' type="submit">Guardar</button>
