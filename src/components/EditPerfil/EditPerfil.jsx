@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux'
 import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import { collection, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../fireBase';
-import './EditPerfil.css'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import './EditPerfil.css'
+import { useQuill } from 'react-quilljs'
+
 import Swal from "sweetalert2"
 
 export const EditPerfil = () => {
