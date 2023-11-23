@@ -4,8 +4,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import { collection, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../fireBase';
 import './EditPerfil.css'
-import { useQuill } from 'react-quilljs'
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import Swal from "sweetalert2"
 
 export const EditPerfil = () => {
@@ -20,12 +20,10 @@ export const EditPerfil = () => {
   const regexAno = /^(198\d|199\d|200[0-3])$/;
   const regexNombre = /^[A-Za-z]+$/;
   const paises = ["Colombia", "Chile", "Mexico", "Argentina", "Uruguay"];
-  const {quill, quillRef} =useQuill({
-    readOnly: !edit,
-    modules:{
-        toolbar: false
-    }
-})
+  const [quillValue, setQuillValue] = useState('');
+  const modules = {
+    toolbar: !edit ? false : { container: [['bold', 'italic', 'underline', 'strike'], ['link']] },
+  };
 const handleChange = (e) => {
   const { name, value } = e.target;
 if (name === 'day' || name === 'month' || name === 'year') {
@@ -50,7 +48,7 @@ const handleEdit = async() => {
   const userDocRef =  doc(collection(db, 'users'), user.userId);
   const updatedData = {
     nameMarca: userUpdate.nameMarca,
-    description: JSON.stringify(quill.getContents()),
+    description: JSON.stringify(quillValue),
     nit: userUpdate.nit,
     instagram: userUpdate.instagram,
     pais: userUpdate.pais,
@@ -95,7 +93,7 @@ const handleEdit = async() => {
     firstName: userUpdate.firstName,
     lastName: userUpdate.lastName,
     instagram: userUpdate.instagram,
-    description: JSON.stringify(quill.getContents()),
+    description: JSON.stringify(quillValue),
     birthday: userUpdate.birthday,
   };
 
@@ -118,7 +116,6 @@ const handleEdit = async() => {
  
   }
   setEdit(!edit);
-  quill.enable(!edit);
 };
    useEffect(() => {
 
@@ -133,7 +130,7 @@ const handleEdit = async() => {
           if (userDocSnap.exists()) {
             await userDocSnap.data().photoURL;
             const description = await userUpdate.description
-            quill.setContents(JSON.parse(description))
+            setQuillValue(JSON.parse(description))
           } else {
             console.error('No se encontró el documento del usuario.');
           }
@@ -145,7 +142,7 @@ const handleEdit = async() => {
      
     
     fetchPhotoURL();
-  }, [user, db, quill]);
+  }, [user, db]);
   
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
@@ -222,8 +219,7 @@ const handleEdit = async() => {
                 </div>
                 <div className='createoferta_description'>
                 <label>Descripcion</label>
-                <div className='description-oferta' ref={quillRef}>
-                </div>
+                <ReactQuill value={quillValue} modules={modules} theme='snow' onChange={(value) => setQuillValue(value)}/>
             </div>
             </>
                 ):(
