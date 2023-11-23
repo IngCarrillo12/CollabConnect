@@ -4,8 +4,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import { collection, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../fireBase';
 import './EditPerfil.css'
-import { useQuill } from 'react-quilljs'
-import 'quill/dist/quill.snow.css'
+// import { useQuill } from 'react-quilljs'
+// import 'quill/dist/quill.snow.css'
 import Swal from "sweetalert2"
 
 export const EditPerfil = () => {
@@ -20,12 +20,12 @@ export const EditPerfil = () => {
   const regexAno = /^(198\d|199\d|200[0-3])$/;
   const regexNombre = /^[A-Za-z]+$/;
   const paises = ["Colombia", "Chile", "Mexico", "Argentina", "Uruguay"];
-  const {quill, quillRef} =useQuill({
-    readOnly: !edit,
-    modules:{
-        toolbar: false
-    }
-})
+//   const {quill, quillRef} =useQuill({
+//     readOnly: !edit,
+//     modules:{
+//         toolbar: false
+//     }
+// })
 const handleChange = (e) => {
   const { name, value } = e.target;
 if (name === 'day' || name === 'month' || name === 'year') {
@@ -96,7 +96,7 @@ const handleEdit = async() => {
     firstName: userUpdate.firstName,
     lastName: userUpdate.lastName,
     instagram: userUpdate.instagram,
-    description: JSON.stringify(quill.getContents()),
+    description: '',
     birthday: userUpdate.birthday,
   };
 
@@ -119,7 +119,7 @@ const handleEdit = async() => {
  
   }
   setEdit(!edit);
-  quill.enable(!edit);
+  // quill.enable(!edit);
 };
    useEffect(() => {
 
@@ -134,7 +134,7 @@ const handleEdit = async() => {
           if (userDocSnap.exists()) {
             await userDocSnap.data().photoURL;
             const description = await userUpdate.description
-            quill.setContents(JSON.parse(description))
+            // quill.setContents(JSON.parse(description))
           } else {
             console.error('No se encontró el documento del usuario.');
           }
@@ -146,7 +146,7 @@ const handleEdit = async() => {
      
     
     fetchPhotoURL();
-  }, [user, db, quill]);
+  }, [user, db]);
   
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
@@ -221,11 +221,11 @@ const handleEdit = async() => {
                     <label  htmlFor="instagram">Instagram: </label>
                     <input  onChange={handleChange} className='input' type="text" disabled={!edit}  name='instagram' value={userUpdate.instagram} />
                 </div>
-                <div className='createoferta_description'>
+                {/* <div className='createoferta_description'>
                 <label>Descripcion</label>
                 <div className='description-oferta' ref={quillRef}>
                 </div>
-            </div>
+            </div> */}
             </>
                 ):(
                   <>
@@ -260,11 +260,11 @@ const handleEdit = async() => {
           </div>
         </div>
         </div>
-        <div className='createoferta_description'>
+        {/* <div className='createoferta_description'>
                 <label>Descripcion</label>
                 <div className='description-oferta' ref={quillRef}>
                 </div>
-            </div>
+            </div> */}
                   </>
                 )
               }
