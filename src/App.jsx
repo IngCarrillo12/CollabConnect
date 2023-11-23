@@ -16,11 +16,11 @@ import { auth } from './fireBase.js'
 import { getUserById } from './resources/Auth.js'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { OfertasPage } from './pages/ofertasPage/OfertasPage.jsx'
-import { obtenerTodasLasOfertas } from './resources/OfertasColaboracion.js'
-import { MarcasPage } from './pages/MarcasPage/MarcasPage.jsx'
-import { InfluencersPage } from './pages/InfluencersPage/InfluencersPage.jsx'
-import { ViewUserPage } from './pages/ViewUserPage/ViewUserPage.jsx'
+import { OfertasPage } from './pages/ofertasPage/OfertasPage.jsx';
+import { obtenerTodasLasOfertas } from './resources/OfertasColaboracion.js';
+import { MarcasPage } from './pages/MarcasPage/MarcasPage.jsx';
+import { InfluencersPage } from './pages/InfluencersPage/InfluencersPage.jsx';
+import { ViewUserPage } from './pages/viewUserPage/viewUserPage.jsx';
 import { addOferta, resetOferta } from './redux/ofertasSlice.js'
 import { OfertasCategoriaPage } from './pages/OfertasCategoriaPage/OfertasCategoriaPage.jsx'
 import { MisPostulacionesPage } from './pages/MisPostulacionesPage/MisPostulacionesPage.jsx'
