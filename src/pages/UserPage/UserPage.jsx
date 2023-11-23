@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { getUserById } from '../../resources/Auth'
 import { Loader } from '../../components/Loader'
 import './styleViewUserPage.css'
-import { CardViewUser } from '../../components/cardViewUser/cardViewUser'
+import { CardViewUser } from '../../components/cardViewUser/CardViewUser.jsx'
 
 export const UserPage = () => {
     const [user, setUser] = useState()
