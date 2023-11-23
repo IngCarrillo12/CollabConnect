@@ -80,7 +80,6 @@ useEffect(() => {
         <Route path='/marcas' element={<MarcasPage/>}/>
         <Route path='/influencers' element={<InfluencersPage/>}/>
         <Route path='/oferta/:id' element={<OfertaPage/>}/>
-        <Route path='/viewUser/:id' element={<ViewUserPage/>}/>
         <Route path='/editperfil' element={<EditPerfil/>}/>
         <Route path="/login" element={<Login />}/>
         <Route path="*" element={<Navigate to="/" />} />
