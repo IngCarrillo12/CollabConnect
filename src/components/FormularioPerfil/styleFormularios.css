@@ -30,4 +30,8 @@
 .form_group-formPerfil{
     width: 40%;
 }
-
+.btn-guardar{
+    background-color: var(--color-verde);
+    border: 1px solid var(--color-verde);
+    color: var(--color-blanco);
+}
